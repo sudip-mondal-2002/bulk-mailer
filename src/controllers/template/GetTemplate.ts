@@ -10,7 +10,8 @@ export const getTemplate: RequestHandler = async (req, res) => {
     const {id} = req.params
     const emailTemplate = await emailRepository.findOne({
         where: {
-            id: parseInt(id)
+            id: parseInt(id),
+            is_deleted: false
         }
     }) as EmailEntity
     if (!emailTemplate) {
@@ -31,10 +32,12 @@ export const getTemplates: RequestHandler = async (req, res) => {
             relations: ["user"],
             where: [
                 {
-                    is_private: false
+                    is_private: false,
+                    is_deleted: false
                 },
                 {
-                    user: {id: req.currentUser?.id, name:req.currentUser?.name, email: req.currentUser?.email} as UserEntity
+                    user: {id: req.currentUser?.id, name:req.currentUser?.name, email: req.currentUser?.email} as UserEntity,
+                    is_deleted: false
                 }
             ]
         }) as EmailEntity[]
