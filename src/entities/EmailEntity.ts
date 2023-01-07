@@ -5,11 +5,17 @@ export class EmailEntity {
     @PrimaryGeneratedColumn()
     id = 0;
 
+    @Column('varchar', {length: 255})
+    name: string;
+
     @Column('varchar', {length: 5000, nullable: false})
     body: string;
     
     @Column({type: "boolean", default: false})
     is_private: boolean;
+
+    @Column({type: "boolean", default: false})
+    is_deleted = false;
 
     @ManyToOne(type=>UserEntity)
     @JoinColumn({name: 'user_id', referencedColumnName: 'id'})
@@ -21,7 +27,8 @@ export class EmailEntity {
     @Column({type: "timestamp"})
     updated_at: Date = new Date();
 
-    constructor(body: string, user: UserEntity, is_private=false) {
+    constructor(name:string, body: string, user: UserEntity, is_private=false) {
+        this.name = name;
         this.body = body
         this.user = user
         this.is_private = is_private

@@ -9,11 +9,12 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 // Import all routes
-import {authRouter} from './routes'
+import {authRouter, templateRouter, mailerRouter} from './routes'
 
 // Use all routes
 app.use(authRouter)
-
+app.use(templateRouter)
+app.use(mailerRouter)
 
 app.all('*',  () => {
     throw new NotFoundError("Route not found")
