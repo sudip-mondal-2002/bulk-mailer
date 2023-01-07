@@ -7,9 +7,12 @@ export class EmailEntity {
 
     @Column('varchar', {length: 5000, nullable: false})
     body: string;
+    
+    @Column({type: "boolean", default: false})
+    is_private: boolean;
 
     @ManyToOne(type=>UserEntity)
-    @JoinColumn({name: 'user_id'})
+    @JoinColumn({name: 'user_id', referencedColumnName: 'id'})
     user: UserEntity;
 
     @Column({type: "timestamp", default: "now()"})
@@ -18,8 +21,9 @@ export class EmailEntity {
     @Column({type: "timestamp"})
     updated_at: Date = new Date();
 
-    constructor(body: string, user: UserEntity) {
+    constructor(body: string, user: UserEntity, is_private=false) {
         this.body = body
         this.user = user
+        this.is_private = is_private
     }
 }
