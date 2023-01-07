@@ -1,21 +1,21 @@
 import {Router} from "express";
-import {deleteTemplate, getTemplate, getTemplates, updateTemplate} from "../controllers";
-import {currentUser, requireAuth} from "../middlewares";
+import {createTemplate, deleteTemplate, getTemplate, getTemplates, updateTemplate} from "../controllers";
+import {currentUser, requestValidator, requireAuth} from "../middlewares";
 import {body} from "express-validator";
 
 const router = Router();
 
-router.get('/templates', currentUser, getTemplates)
+router.get('/', currentUser, getTemplates)
 
-router.get('/template/:id', currentUser, getTemplate)
+router.get('/:id', currentUser, getTemplate)
 
-router.post('/template', currentUser, requireAuth, [
+router.post('/', [
     body('name').trim().notEmpty().withMessage('Name must be provided'),
     body('html').trim().notEmpty().withMessage('HTML must be provided')
-], getTemplate)
+], requestValidator, currentUser, requireAuth, createTemplate)
 
-router.put('/template/:id', currentUser, requireAuth, updateTemplate)
+router.put('/:id', currentUser, requireAuth, updateTemplate)
 
-router.delete('/template/:id', currentUser, requireAuth, deleteTemplate)
+router.delete('/:id', currentUser, requireAuth, deleteTemplate)
 
 export {router as templateRouter}
