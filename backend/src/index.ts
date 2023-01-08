@@ -1,12 +1,12 @@
 import {UserJwtPayload} from "./payloads";
 
-const PORT = process.env.PORT || 3000
 
 import {app} from './app'
 import {createServer} from 'http'
 import dotenv from 'dotenv'
 dotenv.config()
 
+const PORT = process.env.PORT || 3000
 declare global {
     // eslint-disable-next-line @typescript-eslint/no-namespace
     namespace Express {
