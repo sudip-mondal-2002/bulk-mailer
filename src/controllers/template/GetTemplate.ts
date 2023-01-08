@@ -27,19 +27,26 @@ export const getTemplate: RequestHandler = async (req, res) => {
 }
 
 export const getTemplates: RequestHandler = async (req, res) => {
+    const conditions: {
+        is_deleted?: boolean,
+        is_private?: boolean,
+        user?: UserEntity
+    }[] = [
+        {
+            is_deleted: false,
+            is_private: false
+        }
+    ]
+    if (req.currentUser) {
+        conditions.push({
+            user: {id: req.currentUser?.id, name:req.currentUser?.name, email: req.currentUser?.email} as UserEntity,
+            is_deleted: false
+        })
+    }
     try {
         const emailTemplates = await emailRepository.find({
             relations: ["user"],
-            where: [
-                {
-                    is_private: false,
-                    is_deleted: false
-                },
-                {
-                    user: {id: req.currentUser?.id, name:req.currentUser?.name, email: req.currentUser?.email} as UserEntity,
-                    is_deleted: false
-                }
-            ]
+            where: conditions
         }) as EmailEntity[]
         return res.status(200).json(emailTemplates)
     } catch (e) {
