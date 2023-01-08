@@ -14,7 +14,7 @@ import {authRouter, templateRouter, mailerRouter} from './routes'
 // Use all routes
 app.use('/auth', authRouter)
 app.use('/template', templateRouter)
-app.use(mailerRouter)
+app.use('/mail',mailerRouter)
 
 app.all('*',  (req) => {
     console.log(req)

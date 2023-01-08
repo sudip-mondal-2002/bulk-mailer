@@ -5,10 +5,11 @@ import {bulkMailer} from "../controllers";
 
 const router = Router();
 
-router.post('/mail', currentUser, requireAuth, [
+router.post('/send', currentUser, requireAuth, [
     body('template_id').trim().notEmpty().withMessage('Template ID must be provided'),
-    body('mapping').isJSON().withMessage('Mapping must be a valid JSON'),
-    header('recipients').trim().notEmpty().withMessage('Recipients CSV file must be provided')
+    body('mapping').isArray().withMessage('Mapping must be a valid JSON Array'),
+    body('mapping.*.to').isEmail().withMessage('Email must be valid'),
+    body('subject').trim().notEmpty().withMessage('Subject must be provided')
 ],requestValidator, bulkMailer)
 
 

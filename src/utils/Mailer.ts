@@ -1,8 +1,12 @@
 import nodemailer from 'nodemailer';
-
+import dotenv from "dotenv";
+import DOMParser from "node-html-parser";
+dotenv.config({
+    path: process.env.NODE_ENV === "test" ? ".env.test" : ".env"
+});
 export class Mailer {
     private transporter = nodemailer.createTransport({
-        host: process.env.MAIL_HOST,
+        host: process.env.EMAIL_HOST,
         port: parseInt(process.env.EMAIL_PORT!),
         secure: false,
         auth: {
@@ -17,15 +21,15 @@ export class Mailer {
         })
     }
 
-    private compileTemplate(template: string, data: { id: string, value: string }[]): string {
-        const doc = new DOMParser().parseFromString(template, 'text/html');
+    public compileTemplate(template: string, data: { id: string, value: string }[]): string {
+        const doc = DOMParser.parse(template);
         data.forEach(({id, value}) => {
             const element = doc.getElementById(id);
             if (element) {
-                element.innerHTML = value
+                element.innerHTML = value;
             }
         })
-        return doc.documentElement.outerHTML
+        return doc.toString()
     }
 
     public async sendEmail(to: string, subject: string, template: string, data: { id: string, value: string }[]): Promise<void> {
