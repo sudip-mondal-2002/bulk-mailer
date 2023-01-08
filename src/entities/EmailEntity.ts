@@ -27,7 +27,7 @@ export class EmailEntity {
     @Column({type: "timestamp"})
     updated_at: Date = new Date();
 
-    constructor(name:string, body: string, user: UserEntity, is_private=false) {
+    constructor(name: string, body: string, user: UserEntity, is_private = false) {
         this.name = name;
         this.body = body
         this.user = user

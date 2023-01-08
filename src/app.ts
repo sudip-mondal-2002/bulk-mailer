@@ -12,11 +12,12 @@ app.use(express.urlencoded({extended: true}))
 import {authRouter, templateRouter, mailerRouter} from './routes'
 
 // Use all routes
-app.use(authRouter)
-app.use(templateRouter)
+app.use('/auth', authRouter)
+app.use('/template', templateRouter)
 app.use(mailerRouter)
 
-app.all('*',  () => {
+app.all('*',  (req) => {
+    console.log(req)
     throw new NotFoundError("Route not found")
 })
 app.use(errorHandler)
