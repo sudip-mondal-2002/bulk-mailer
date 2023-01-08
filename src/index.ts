@@ -24,6 +24,10 @@ if(process.env.JWT_KEY === undefined) {
     }
 }
 
+if(process.env.EMAIL_HOST_USER === undefined) {
+    console.log("EMAIL_HOST_USER must be defined")
+}
+
 createServer(app).listen(PORT, () => {
   console.log(`Listening on port ${PORT}`)
 })
