@@ -5,10 +5,11 @@ import Cookies from "js-cookie";
 export type Template = {
     name: string,
     html: string,
-    id: number
+    id: number,
+    ids: string[]
 }
 
-export const UseTemplatesHook = () => {
+export const UseTemplatesHook = ({tid}:{tid?:any}) => {
     const [templates, setTemplates] = React.useState<Template[]>([])
     const [errors, setErrors] = React.useState([])
     const getTemplates = async () => {
@@ -21,8 +22,9 @@ export const UseTemplatesHook = () => {
             return response.data.map((template: any)=>{
                 return {
                     name: template.name,
-                    html: template.html,
-                    id: template.id
+                    html: template.body,
+                    id: template.id,
+                    ids: template.ids
                 } as Template
             })
         } catch (e: any) {
@@ -39,8 +41,9 @@ export const UseTemplatesHook = () => {
             })
             return {
                 name: response.data.name,
-                html: response.data.html,
-                id: response.data.id
+                html: response.data.body,
+                id: response.data.id,
+                ids: response.data.ids
             } as Template
         } catch (e: any) {
             setErrors(e.response?.data?.errors || [{"message": "Some error"}])
@@ -95,11 +98,13 @@ export const UseTemplatesHook = () => {
     }
 
     React.useEffect(() => {
-        getTemplates().then(res => {
-            console.log(res)
+        if(!tid) getTemplates().then(res => {
             setTemplates(res)
         })
-    }, [])
+        else getTemplate(tid).then(res => {
+            if(res) setTemplates([res])
+        })
+    }, [tid])
     return {
         templates,
         errors,

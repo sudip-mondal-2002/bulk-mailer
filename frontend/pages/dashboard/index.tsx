@@ -4,7 +4,7 @@ import {UseTemplatesHook} from "../../hooks/useTemplatesHook";
 
 export default function Dashboard() {
     const {profile} = UseAuthHook()
-    const {templates, errors} = UseTemplatesHook()
+    const {templates, errors} = UseTemplatesHook({})
     if (!profile) {
         return <div className="dashboard">
             <div className="Loading">Loading</div>
@@ -14,9 +14,9 @@ export default function Dashboard() {
         {
             templates.map((t, i) => {
                     return <div key={i} className="template">
-                        <div className="title">
+                        <button className="title" onClick={()=>window.location.href = `/dashboard/template/${t.id}`}>
                             {t.name}
-                        </div>
+                        </button>
                     </div>
                 }
             )
