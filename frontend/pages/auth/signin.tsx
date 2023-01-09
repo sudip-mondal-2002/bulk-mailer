@@ -5,7 +5,7 @@ export default function Signin() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const {signin, errors} = UseAuthHook()
-    return <div className="auth signup">
+    return <div className="auth signin">
         <h1>Signup</h1>
         <form onSubmit={async (e) => {
             e.preventDefault()

@@ -48,6 +48,23 @@ export const UseAuthHook = ()=>{
             setErrors(e.response?.data.errors || [{"message": "Some error"}])
         }
     }
+    React.useEffect(()=>{
+        const token = Cookies.get("token")
+        if(!token) return
+        axios.get("http://localhost:8000/auth/user",{
+            headers: {
+                "Authorization": token
+            }
+        }).then(res=>{
+            const user = {
+                name: res.data.user.name,
+                email: res.data.user.email
+            } as Profile
+            setProfile(user)
+        }).catch(error=>{
+            setErrors(error.response.errors)
+        })
+    },[])
     return {
         profile,
         errors,
