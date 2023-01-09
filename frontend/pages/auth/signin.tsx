@@ -1,21 +1,16 @@
 import React from "react";
 import {UseAuthHook} from "../../hooks/useAuthHook";
 
-export default function Signup() {
+export default function Signin() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
-    const [name, setName] = React.useState("");
-    const {signup, errors} = UseAuthHook()
+    const {signin, errors} = UseAuthHook()
     return <div className="auth signup">
         <h1>Signup</h1>
         <form onSubmit={async (e) => {
             e.preventDefault()
-            await signup(name, email, password)
+            await signin(email, password)
         }}>
-            <div className="form-control">
-                <label htmlFor="name">Name</label>
-                <input type="text" id="name" value={name} onChange={(e)=>setName(e.target.value)}/>
-            </div>
             <div className="form-control">
                 <label htmlFor="email">Email</label>
                 <input type="email" id="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
@@ -27,9 +22,9 @@ export default function Signup() {
             <button type="submit">Signup</button>
         </form>
         {errors && errors.map((e:{message: string, field?:string},i: number) =>{
-                return <div key={i} className="error">
-                    {e.message}
-                </div>
+            return <div key={i} className="error">
+                {e.message}
+            </div>
         })}
     </div>
 }
