@@ -2,6 +2,7 @@ import React from "react";
 import {useRouter} from "next/router";
 import {UseTemplatesHook} from "../../../hooks/useTemplatesHook";
 import CSVReader from "react-csv-reader";
+import {UseMailerHook} from "../../../hooks/useMailerHook";
 
 export default function TemplateStandalone() {
     const router = useRouter()
@@ -10,6 +11,7 @@ export default function TemplateStandalone() {
     const [mapping, setMapping] = React.useState({})
     const [subject, setSubject] = React.useState("")
     const [fileData, setFileData] = React.useState<any[]>([])
+    const {sendEmail} = UseMailerHook()
     return <div className="template">
         <h1>Template</h1>
         {
@@ -47,9 +49,18 @@ export default function TemplateStandalone() {
                 </select>
                 <div>
                     <button onClick={async () => {
-                        console.log(mapping)
-                        console.log(subject)
-                        console.log(fileData)
+                        const structuredMap = fileData.map((row) => {
+                            return {
+                                to: row[mapping.email] || "",
+                                data: Object.keys(mapping).map((id) => {
+                                    return {
+                                        id,
+                                        value: row[mapping[id]] || ""
+                                    }
+                                })
+                            }
+                        }).filter((row) => row.to !== "")
+                        await sendEmail(tid, subject, structuredMap)
                     }}>Send
                     </button>
                 </div>
