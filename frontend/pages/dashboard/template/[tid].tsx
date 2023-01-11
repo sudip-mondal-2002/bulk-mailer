@@ -3,6 +3,7 @@ import {useRouter} from "next/router";
 import {UseTemplatesHook} from "../../../hooks/useTemplatesHook";
 import CSVReader from "react-csv-reader";
 import {UseMailerHook} from "../../../hooks/useMailerHook";
+import {Button, Container, MenuItem, Select, TextField, Typography} from "@mui/material";
 
 export default function TemplateStandalone() {
     const router = useRouter()
@@ -12,12 +13,12 @@ export default function TemplateStandalone() {
     const [subject, setSubject] = React.useState("")
     const [fileData, setFileData] = React.useState<any[]>([])
     const {sendEmail} = UseMailerHook()
-    return <div className="template">
-        <h1>Template</h1>
+    return <Container className="template">
+        <Typography variant={"h1"}>Template</Typography>
         {
-            templates[0] && <div className="template">
-                <h2>{templates[0].name}</h2>
-                <input type="text" value={subject} onChange={(e) => setSubject(e.target.value)}/>
+            templates[0] && <Container className="template">
+                <Typography variant={"h2"}>{templates[0].name}</Typography>
+                <TextField type="text" value={subject} onChange={(e) => setSubject(e.target.value)}/>
                 <CSVReader
                     parserOptions={{header: true}}
                     onFileLoaded={(data) => {
@@ -25,30 +26,30 @@ export default function TemplateStandalone() {
                     }}/>
                 {
                     templates[0].ids.map((id, i) => {
-                        return <div key={i}>
-                            <label htmlFor={id}>{id}</label>
-                            <select id={id} onChange={(e) => {
+                        return <Container key={i}>
+                            <Typography>{id}</Typography>
+                            <Select id={id} onChange={(e) => {
                                 setMapping({...mapping, [id]: e.target.value})
                             }}>
 
                                 {fileData.length > 0 && Object.keys(fileData[0]).map((k, i) => {
-                                    return <option value={k} key={i}>{k}</option>
+                                    return <MenuItem value={k} key={i}>{k}</MenuItem>
                                 })}
-                            </select>
-                        </div>
+                            </Select>
+                        </Container>
                     })
                 }
-                <label htmlFor="email">Email</label>
-                <select id="email" onChange={(e) => {
+                <Typography>Email</Typography>
+                <Select id="email" onChange={(e) => {
                     setMapping({...mapping, email: e.target.value})
                 }}>
 
                     {fileData.length > 0 && Object.keys(fileData[0]).map((k, i) => {
-                        return <option value={k} key={i}>{k}</option>
+                        return <MenuItem value={k} key={i}>{k}</MenuItem>
                     })}
-                </select>
-                <div>
-                    <button onClick={async () => {
+                </Select>
+                <Container>
+                    <Button onClick={async () => {
                         const structuredMap = fileData.map((row) => {
                             return {
                                 to: row[mapping.email] || "",
@@ -62,10 +63,10 @@ export default function TemplateStandalone() {
                         }).filter((row) => row.to !== "")
                         await sendEmail(tid, subject, structuredMap)
                     }}>Send
-                    </button>
-                </div>
-            </div>
+                    </Button>
+                </Container>
+            </Container>
         }
-        {templates.length && <div dangerouslySetInnerHTML={{__html: templates[0].html}}/>}
-    </div>
+        {templates.length && <Container dangerouslySetInnerHTML={{__html: templates[0].html}}/>}
+    </Container>
 }

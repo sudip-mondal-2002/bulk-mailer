@@ -1,35 +1,35 @@
 import React from "react";
 import {UseAuthHook} from "../../hooks/useAuthHook";
+import {Button, Container, FormControl, TextField, Typography} from "@mui/material";
 
 export default function Signup() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [name, setName] = React.useState("");
     const {signup, errors} = UseAuthHook()
-    return <div className="auth signup">
-        <h1>Signup</h1>
-        <form onSubmit={async (e) => {
-            e.preventDefault()
-            await signup(name, email, password)
-        }}>
-            <div className="form-control">
-                <label htmlFor="name">Name</label>
-                <input type="text" id="name" value={name} onChange={(e)=>setName(e.target.value)}/>
-            </div>
-            <div className="form-control">
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-            </div>
-            <div className="form-control">
-                <label htmlFor="password">Password</label>
-                <input type="password" id="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
-            </div>
-            <button type="submit">Signup</button>
-        </form>
+    return <Container className="auth signup">
+        <Typography>Sign Up</Typography>
+        <FormControl>
+            <Container className="form-control">
+                <Typography>Name</Typography>
+                <TextField type="text" id="name" value={name} onChange={(e)=>setName(e.target.value)}/>
+            </Container>
+            <Container className="form-control">
+                <Typography>Email</Typography>
+                <TextField type="email" id="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+            </Container>
+            <Container className="form-control">
+                <Typography>Password</Typography>
+                <TextField type="password" id="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+            </Container>
+            <Button type="submit" onClick={async (e) => {
+                await signup(name, email, password)
+            }}>Sign Up</Button>
+        </FormControl>
         {errors && errors.map((e:{message: string, field?:string},i: number) =>{
                 return <div key={i} className="error">
                     {e.message}
                 </div>
         })}
-    </div>
+    </Container>
 }
