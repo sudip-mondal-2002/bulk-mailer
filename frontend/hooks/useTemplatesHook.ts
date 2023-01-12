@@ -14,7 +14,7 @@ export const UseTemplatesHook = ({tid}:{tid?:any}) => {
     const [errors, setErrors] = React.useState([])
     const getTemplates = async () => {
         try {
-            const response = await axios.get("http://localhost:8000/template", {
+            const response = await axios.get("https://bulk-mailer-backend.azurewebsites.net/template", {
                 headers: {
                     "Authorization": Cookies.get("token")
                 }
@@ -34,7 +34,7 @@ export const UseTemplatesHook = ({tid}:{tid?:any}) => {
     }
     const getTemplate = async (id: number) => {
         try {
-            const response = await axios.get(`http://localhost:8000/template/${id}`, {
+            const response = await axios.get(`https://bulk-mailer-backend.azurewebsites.net/template/${id}`, {
                 headers: {
                     "Authorization": Cookies.get("token")
                 }
@@ -53,7 +53,7 @@ export const UseTemplatesHook = ({tid}:{tid?:any}) => {
 
     const createTemplate = async (name: string, html: string) => {
         try {
-            await axios.post("http://localhost:8000/template", {
+            await axios.post("https://bulk-mailer-backend.azurewebsites.net/template", {
                 name,
                 html
             }, {
@@ -70,7 +70,7 @@ export const UseTemplatesHook = ({tid}:{tid?:any}) => {
 
     const updateTemplate = async (id: number, name?: string, html?: string) => {
         try {
-            await axios.put(`http://localhost:8000/template/${id}`, {
+            await axios.put(`https://bulk-mailer-backend.azurewebsites.net/template/${id}`, {
                 name,
                 html
             },{
@@ -87,7 +87,7 @@ export const UseTemplatesHook = ({tid}:{tid?:any}) => {
 
     const deleteTemplate = async (id: number = tid) => {
         try {
-            await axios.delete(`http://localhost:8000/template/${id}`, {
+            await axios.delete(`https://bulk-mailer-backend.azurewebsites.net/template/${id}`, {
                 headers: {
                     "Authorization": Cookies.get("token")
                 }

@@ -11,7 +11,7 @@ export const UseAuthHook = ()=>{
     const [errors, setErrors] = React.useState([]);
     const signup = async (name: string, email:string, password:string)=>{
         try{
-            const result = await axios.post("http://localhost:8000/auth/signup", {
+            const result = await axios.post("https://bulk-mailer-backend.azurewebsites.net/auth/signup", {
                 name,
                 email,
                 password
@@ -31,7 +31,7 @@ export const UseAuthHook = ()=>{
     const signin = async (email:string, password:string)=>{
         console.log(email,password)
         try{
-            const result = await axios.post("http://localhost:8000/auth/signin", {
+            const result = await axios.post("https://bulk-mailer-backend.azurewebsites.net/auth/signin", {
                 email,
                 password
             })
@@ -51,7 +51,7 @@ export const UseAuthHook = ()=>{
     React.useEffect(()=>{
         const token = Cookies.get("token")
         if(!token) return
-        axios.get("http://localhost:8000/auth/user",{
+        axios.get("https://bulk-mailer-backend.azurewebsites.net/auth/user",{
             headers: {
                 "Authorization": token
             }
