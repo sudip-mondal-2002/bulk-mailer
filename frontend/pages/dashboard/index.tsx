@@ -2,6 +2,7 @@ import React from "react";
 import {UseAuthHook} from "../../hooks/useAuthHook";
 import {UseTemplatesHook} from "../../hooks/useTemplatesHook";
 import {Button, Container, Typography} from "@mui/material";
+import Head from "next/head";
 
 export default function Dashboard() {
     const {profile} = UseAuthHook()
@@ -11,7 +12,13 @@ export default function Dashboard() {
             <Typography className="Loading">Loading</Typography>
         </Container>
     }
-    return <Container className="dashboard">
+    return <>
+        <Head>
+            <title>Dashboard</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <link rel="icon" href="/favicon.ico"/>
+        </Head>
+        <Container className="dashboard">
         {
             templates.map((t, i) => {
                     return <Container key={i} className="template">
@@ -23,4 +30,5 @@ export default function Dashboard() {
             )
         }
     </Container>
+        </>
 }

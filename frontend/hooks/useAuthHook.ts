@@ -29,7 +29,6 @@ export const UseAuthHook = ()=>{
         }
     }
     const signin = async (email:string, password:string)=>{
-        console.log(email,password)
         try{
             const result = await axios.post("https://bulk-mailer-backend.azurewebsites.net/auth/signin", {
                 email,
@@ -50,6 +49,7 @@ export const UseAuthHook = ()=>{
     }
     React.useEffect(()=>{
         const token = Cookies.get("token")
+        console.log(token)
         if(!token) return
         axios.get("https://bulk-mailer-backend.azurewebsites.net/auth/user",{
             headers: {
@@ -57,12 +57,12 @@ export const UseAuthHook = ()=>{
             }
         }).then(res=>{
             const user = {
-                name: res.data.user.name,
-                email: res.data.user.email
+                name: res.data.name,
+                email: res.data.email
             } as Profile
             setProfile(user)
         }).catch(error=>{
-            setErrors(error.response.errors)
+            setErrors(error.response?.errors || [{"message": "Some error"}])
         })
     },[])
     return {
