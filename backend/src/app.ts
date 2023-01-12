@@ -6,6 +6,7 @@ import {NotFoundError} from "./errors";
 
 export const app = express()
 app.use(cors({
+    origin: "*",
     allowedHeaders: [HttpHeaders.CONTENT_TYPE, HttpHeaders.AUTHORIZATION],
     exposedHeaders: [HttpHeaders.AUTHORIZATION]
 }))
