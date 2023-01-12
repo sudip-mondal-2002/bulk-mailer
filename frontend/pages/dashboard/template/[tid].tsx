@@ -9,7 +9,7 @@ export default function TemplateStandalone() {
     const router = useRouter()
     const {tid} = router.query
     const {templates, deleteTemplate} = UseTemplatesHook({tid})
-    const [mapping, setMapping] = React.useState({})
+    const [mapping, setMapping] = React.useState<any>({email: ""})
     const [subject, setSubject] = React.useState("")
     const [fileData, setFileData] = React.useState<any[]>([])
     const {sendEmail} = UseMailerHook()
@@ -46,7 +46,7 @@ export default function TemplateStandalone() {
                 }
                 <Typography>Email</Typography>
                 <Select id="email" onChange={(e) => {
-                    setMapping({...mapping, email: e.target.value})
+                    setMapping({...mapping, email: e.target.value as string})
                 }}>
 
                     {fileData.length > 0 && Object.keys(fileData[0]).map((k, i) => {

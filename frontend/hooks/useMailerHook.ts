@@ -7,7 +7,7 @@ export const UseMailerHook = () => {
     const sendEmail = async (template_id: any, subject: string, mapping: any[]) => {
         console.log(template_id, subject, mapping)
         try {
-            await axios.post("http://localhost:8000/mail/send", {
+            await axios.post("https://bulk-mailer-backend.azurewebsites.net/mail/send", {
                 template_id,
                 subject,
                 mapping
