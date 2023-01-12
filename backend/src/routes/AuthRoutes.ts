@@ -1,6 +1,6 @@
 import {Router} from "express";
 import {signup, signin} from "../controllers";
-import {requestValidator} from "../middlewares";
+import {currentUser, requestValidator, requireAuth} from "../middlewares";
 import {body} from "express-validator";
 
 const router = Router();
@@ -15,5 +15,9 @@ router.post('/signin', [
     body('email').isEmail().withMessage('Email must be valid'),
     body('password').trim().notEmpty().withMessage('Password must be provided')
 ], requestValidator, signin)
+
+router.get('/user', currentUser, requireAuth, (req, res) => {
+    res.send(req.currentUser)
+})
 
 export {router as authRouter};
