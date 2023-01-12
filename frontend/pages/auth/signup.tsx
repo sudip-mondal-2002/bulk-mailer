@@ -8,7 +8,7 @@ export default function Signup() {
     const [name, setName] = React.useState("");
     const {signup, errors} = UseAuthHook()
     return <Container className="auth signup">
-        <Typography>Sign Up</Typography>
+        <Typography variant={"h1"}>Sign Up</Typography>
         <FormControl>
             <Container className="form-control">
                 <Typography>Name</Typography>
@@ -22,7 +22,7 @@ export default function Signup() {
                 <Typography>Password</Typography>
                 <TextField type="password" id="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
             </Container>
-            <Button type="submit" onClick={async (e) => {
+            <Button variant={"contained"} type="submit" onClick={async (e) => {
                 await signup(name, email, password)
             }}>Sign Up</Button>
         </FormControl>
