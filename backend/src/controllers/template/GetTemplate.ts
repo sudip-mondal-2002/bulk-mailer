@@ -4,6 +4,7 @@ import {EmailEntity} from "../../entities/EmailEntity";
 import {UserEntity} from "../../entities";
 import {NotFoundError, UnauthorizedError} from "../../errors";
 import {InternalServerError} from "../../errors/InternalServerError";
+import { IdParser } from "../../utils/IdParser";
 
 const emailRepository = AppDataSource.getRepository(EmailEntity);
 export const getTemplate: RequestHandler = async (req, res) => {
@@ -23,7 +24,7 @@ export const getTemplate: RequestHandler = async (req, res) => {
         }
     }
 
-    res.status(200).json(emailTemplate)
+    res.status(200).json({...emailTemplate, ids: IdParser.parseId(emailTemplate.body)})
 }
 
 export const getTemplates: RequestHandler = async (req, res) => {
@@ -48,7 +49,12 @@ export const getTemplates: RequestHandler = async (req, res) => {
             relations: ["user"],
             where: conditions
         }) as EmailEntity[]
-        return res.status(200).json(emailTemplates)
+        return res.status(200).json(emailTemplates.map(emailTemplate => {
+            return {
+                ...emailTemplate,
+                ids: IdParser.parseId(emailTemplate.body)
+            }
+        }))
     } catch (e) {
         console.log(e)
         throw new InternalServerError()
