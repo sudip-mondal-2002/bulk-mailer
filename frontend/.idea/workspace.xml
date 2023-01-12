@@ -10,11 +10,6 @@
       <change beforePath="$PROJECT_DIR$/../backend/src/controllers/template/GetTemplate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/controllers/template/GetTemplate.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/routes/AuthRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/routes/AuthRoutes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/signin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/signin.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/signup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/signup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/dashboard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/dashboard/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Home.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Home.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,22 +35,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/programming/web-dev/bulk-mailer/frontend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "D:/Program Files/nvm/v18.12.1/node",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "D:\\programming\\web-dev\\bulk-mailer\\frontend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/programming/web-dev/bulk-mailer/frontend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;D:/Program Files/nvm/v18.12.1/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\programming\\web-dev\\bulk-mailer\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="dev" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -79,7 +74,8 @@
       <workItem from="1673202930686" duration="5237000" />
       <workItem from="1673246032228" duration="66000" />
       <workItem from="1673249687718" duration="17827000" />
-      <workItem from="1673455768906" duration="4546000" />
+      <workItem from="1673455768906" duration="5884000" />
+      <workItem from="1673505304459" duration="619000" />
     </task>
     <servers />
   </component>

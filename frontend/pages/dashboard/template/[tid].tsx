@@ -8,7 +8,7 @@ import {Button, Container, MenuItem, Select, TextField, Typography} from "@mui/m
 export default function TemplateStandalone() {
     const router = useRouter()
     const {tid} = router.query
-    const {templates} = UseTemplatesHook({tid})
+    const {templates, deleteTemplate} = UseTemplatesHook({tid})
     const [mapping, setMapping] = React.useState({})
     const [subject, setSubject] = React.useState("")
     const [fileData, setFileData] = React.useState<any[]>([])
@@ -16,7 +16,12 @@ export default function TemplateStandalone() {
     return <Container className="template">
         <Typography variant={"h1"}>Template</Typography>
         {
-            templates[0] && <Container className="template">
+            templates[0] && <Container sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column"
+            }} className="template">
                 <Typography variant={"h2"}>{templates[0].name}</Typography>
                 <TextField type="text" value={subject} onChange={(e) => setSubject(e.target.value)}/>
                 <CSVReader
@@ -28,7 +33,7 @@ export default function TemplateStandalone() {
                     templates[0].ids.map((id, i) => {
                         return <Container key={i}>
                             <Typography>{id}</Typography>
-                            <Select id={id} onChange={(e) => {
+                            <Select key={id} onChange={(e) => {
                                 setMapping({...mapping, [id]: e.target.value})
                             }}>
 
@@ -62,8 +67,14 @@ export default function TemplateStandalone() {
                             }
                         }).filter((row) => row.to !== "")
                         await sendEmail(tid, subject, structuredMap)
-                    }}>Send
+                        window.location.href = "/dashboard"
+                    }}>
+                        Send
                     </Button>
+                    <Button onClick={async () => {
+                        await deleteTemplate();
+                        window.location.href = "/dashboard"
+                    }}> Delete </Button>
                 </Container>
             </Container>
         }

@@ -85,7 +85,7 @@ export const UseTemplatesHook = ({tid}:{tid?:any}) => {
         }
     }
 
-    const deleteTemplate = async (id: number) => {
+    const deleteTemplate = async (id: number = tid) => {
         try {
             await axios.delete(`http://localhost:8000/template/${id}`, {
                 headers: {
