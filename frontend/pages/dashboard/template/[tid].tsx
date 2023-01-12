@@ -38,7 +38,12 @@ export default function TemplateStandalone() {
                         }}/>
                     {
                         templates[0].ids.map((id, i) => {
-                            return <Container key={i}>
+                            return <Container key={i} sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                flexDirection: "column"
+                            }}>
                                 <Typography>{id}</Typography>
                                 <Select key={id} onChange={(e) => {
                                     setMapping({...mapping, [id]: e.target.value})

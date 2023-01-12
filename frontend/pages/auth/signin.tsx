@@ -2,6 +2,7 @@ import React from "react";
 import {UseAuthHook} from "../../hooks/useAuthHook";
 import {Button, Container, FormControl, InputLabel, TextField, Typography} from "@mui/material";
 import Head from "next/head";
+import {viewport} from "@popperjs/core";
 
 export default function Signin() {
     const [email, setEmail] = React.useState("");
@@ -29,6 +30,7 @@ export default function Signin() {
                     marginTop: "20px"
                 }} onClick={async (e) => {
                     await signin(email, password)
+                    window.location.href = "/dashboard"
                 }}>Sign In</Button>
             </FormControl>
             {errors && errors.map((e: { message: string, field?: string }, i: number) => {

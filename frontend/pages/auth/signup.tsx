@@ -32,6 +32,7 @@ export default function Signup() {
                 </Container>
                 <Button variant={"contained"} type="submit" onClick={async (e) => {
                     await signup(name, email, password)
+                    window.location.href = "/dashboard"
                 }}>Sign Up</Button>
             </FormControl>
             {errors && errors.map((e: { message: string, field?: string }, i: number) => {

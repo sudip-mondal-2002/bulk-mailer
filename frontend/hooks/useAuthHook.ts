@@ -49,7 +49,6 @@ export const UseAuthHook = ()=>{
     }
     React.useEffect(()=>{
         const token = Cookies.get("token")
-        console.log(token)
         if(!token) return
         axios.get("https://bulk-mailer-backend.azurewebsites.net/auth/user",{
             headers: {
